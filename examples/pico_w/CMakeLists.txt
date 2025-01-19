@@ -1,12 +1,7 @@
 cmake_minimum_required(VERSION 3.13)
 
 # PICO_BOARD should be set to 'pico_w', 'pico2_w' or not set at all.
-if(DEFINED PICO_BOARD)
-    message(DEBUG, "Using PICO_BOARD ${PICO_BOARD}")
-else()
-    message(VERBOSE, "PICO_BOARD not defined. Using 'pico_w'")
-    set(PICO_BOARD "pico_w")
-endif()
+set(PICO_BOARD pico2_w CACHE STRING "Board type")
 
 set(BLUEPAD32_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/../..)
 

@@ -19,6 +19,9 @@ struct uni_platform* get_my_platform(void);
 int main() {
     stdio_init_all();
 
+    sleep_ms(2000);
+    printf("test");
+
     // initialize CYW43 driver architecture (will enable BT if/because CYW43_ENABLE_BLUETOOTH == 1)
     if (cyw43_arch_init()) {
         loge("failed to initialise cyw43_arch\n");

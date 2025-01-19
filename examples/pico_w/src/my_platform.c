@@ -84,11 +84,13 @@ static uni_error_t my_platform_on_device_discovered(bd_addr_t addr, const char* 
 }
 
 static void my_platform_on_device_connected(uni_hid_device_t* d) {
-    logi("my_platform: device connected: %p\n", d);
+    logi("STOP!!!! my_platform: device connected: %p\n", d);
+    uni_bt_stop_scanning_unsafe();
 }
 
 static void my_platform_on_device_disconnected(uni_hid_device_t* d) {
-    logi("my_platform: device disconnected: %p\n", d);
+    logi("START!!!! my_platform: device disconnected: %p\n", d);
+    uni_bt_start_scanning_and_autoconnect_unsafe();
 }
 
 static uni_error_t my_platform_on_device_ready(uni_hid_device_t* d) {
@@ -141,15 +143,15 @@ static void my_platform_on_controller_data(uni_hid_device_t* d, uni_controller_t
             }
 
             // Toggle Bluetooth connections
-            if ((gp->buttons & BUTTON_SHOULDER_L) && enabled) {
-                logi("*** Disabling Bluetooth connections\n");
-                uni_bt_stop_scanning_safe();
-                enabled = false;
+            if ((gp->buttons & BUTTON_SHOULDER_L)) {
+                // loge("*** Disabling Bluetooth connections\n");
+                // uni_bt_stop_scanning_safe();
+                // enabled = false;
             }
             if ((gp->buttons & BUTTON_SHOULDER_R) && !enabled) {
-                logi("*** Enabling Bluetooth connections\n");
-                uni_bt_start_scanning_and_autoconnect_safe();
-                enabled = true;
+                // loge("*** Enabling Bluetooth connections\n");
+                // uni_bt_start_scanning_and_autoconnect_safe();
+                // enabled = true;
             }
             break;
         case UNI_CONTROLLER_CLASS_BALANCE_BOARD:
